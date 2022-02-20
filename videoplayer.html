@@ -48,22 +48,13 @@
         <script> 
 				// console.log(url); 
 				var player = document.getElementById("myvideo"); 
-				var  source = document.getElementById("myvideo").src
-				var flag = false; 
+				var  source = document.getElementById("myvideo").src;
+				var  first = true; 
 			
 				function av_start() {
-						if (player.paused == true &&  flag ==true ) {
-							//console.log('continue ') 
-							player.play()
-						}
-						else{
-						
-							if(player.paused == false ){
-								player.pause()
-								return
-							}
-						
-							//console.log('start play ')
+
+						if (first) {
+							console.log('first play ')
 							url = document.getElementsByName('urlinput')[0].value;
 							if (url == ''){
 								console.log('dedfault play uer ')
@@ -72,26 +63,31 @@
 							else
 								source = url;
 								
-							//console.log(source);
 							document.getElementById("myvideo").src = source 
 							player.play()
-							flag = true
-						}					
+							first = false;
+						}
+						else{
+								if (player.paused ) {
+									player.play()
+								}
+								else{
+									player.pause()
+								}
+						}
 				}
 		 
 				function av_pause() {
-						//console.log('av_pause')
 						player.pause();
 				}
 		 
 				function av_destroy() {
-						//console.log('av_destroy')
 						player = null;
+						first = true; 
 						window.location.reload();
 				}
 		 
 				function av_seekto() {
-						//console.log('av_seekto')
 						var input = document.getElementsByName('seekpoint')[0];
 						player.currentTime = parseFloat(input.value);
 				}
