@@ -26,23 +26,23 @@
 							margin-left: auto;
 							margin-right: auto;
 						}
+						
 			</style>
 		
     </head>
     <body>
 	
-	     <input name="urlinput" class="urlInput" type="text" placeholder="url" value=""/>
+	     <input name="urlinput" class="urlInput" type="text" placeholder="URL" value=""/>
         <video id='myvideo' width=960 height=540 class="video-js vjs-default-skin" controls>
             <!-- RTMP直播源地址-->
             <source src="">    
         </video>
 		
 		<div class="controls">
-			<button Onclick="av_start()">Start</button>
-			<button Onclick="av_pause()">Pause</button>
-			<button Onclick="av_destroy()">Destroy</button>
-			<input style="width:100px" type="text" name="seekpoint"/>
-			<button Onclick="av_seekto()">SeekTo(s)</button>
+				<button style=" margin-left: 200px; width: 150px;height: 60px;" Onclick="av_destroy()">Destroy</button> 
+				<button style="width: 250px;height: 150px;" Onclick="av_start()">Start/Pause</button>
+				<button style="width: 150px;height: 60px;" Onclick="av_seekto()">SeekTo (s)</button>
+				<input style="width:50px; height: 52px"" type="text" name="seekpoint"/>
 		</div>
 			
         <script> 
@@ -53,10 +53,16 @@
 			
 				function av_start() {
 						if (player.paused == true &&  flag ==true ) {
-							//console.log('continue ')
+							//console.log('continue ') 
 							player.play()
 						}
 						else{
+						
+							if(player.paused == false ){
+								player.pause()
+								return
+							}
+						
 							//console.log('start play ')
 							url = document.getElementsByName('urlinput')[0].value;
 							if (url == ''){
@@ -108,8 +114,7 @@
 							 case 4:
 								console.log("媒体资源不可用或媒体格式不被支持");
 								av_destroy() ;
-								break; 
-					 
+								break; 					 
 						 }
 				},false);
 			
